@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { store } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
@@ -69,6 +70,17 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
+          {store.whatsapp ? (
+            <a
+              href={`https://wa.me/${store.whatsapp.replace(/\D/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="تواصل عبر واتساب"
+              className="hidden items-center justify-center rounded-full bg-[#25D366]/10 p-2 text-[#25D366] transition-colors hover:bg-[#25D366]/20 md:inline-flex"
+            >
+              <WhatsAppIcon className="size-5" />
+            </a>
+          ) : null}
           <ThemeToggle />
           <div className="md:hidden">
             <Sheet>
@@ -111,6 +123,22 @@ export function Navbar() {
                       {link.label}
                     </SheetClose>
                   ))}
+                    {store.whatsapp ? (
+                      <SheetClose
+                        nativeButton={false}
+                        render={
+                          <a
+                            href={`https://wa.me/${store.whatsapp.replace(/\D/g, "")}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-[#25D366] transition-colors hover:bg-muted"
+                          />
+                        }
+                      >
+                        <WhatsAppIcon className="size-4" />
+                        واتساب
+                      </SheetClose>
+                    ) : null}
                   </div>
               </SheetContent>
             </Sheet>

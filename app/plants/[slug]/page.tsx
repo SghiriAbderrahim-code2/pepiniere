@@ -58,10 +58,10 @@ export default async function ProductPage({
   }
 
   return (
-    <Container className="py-8 sm:py-12">
+    <Container className="py-10 sm:py-16">
       <nav
         aria-label="مسار التنقل"
-        className="mb-6 flex items-center gap-1 text-sm text-muted-foreground"
+        className="mb-8 flex items-center gap-1 text-sm text-muted-foreground"
       >
         <Link href="/" className="transition-colors hover:text-foreground">
           الرئيسية
@@ -74,29 +74,34 @@ export default async function ProductPage({
         <span className="text-foreground">{product.name}</span>
       </nav>
 
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
         <Reveal className="min-w-0">
           <ProductGallery mainImage={product.main_image} images={images} />
         </Reveal>
-        <Reveal delay={0.1} className="flex flex-col gap-5">
+        <Reveal delay={0.1} className="flex flex-col gap-6">
           <div>
-            <h1 className="font-heading text-3xl font-bold text-foreground">
+            <h1 className="font-heading text-4xl font-bold leading-tight text-foreground">
               {product.name}
             </h1>
-            <p className="mt-2 text-2xl font-semibold text-primary">
+            <p className="mt-3 text-3xl font-semibold text-primary">
               {formatPrice(product.price)}
             </p>
           </div>
           {product.short_description ? (
-            <p className="text-muted-foreground">{product.short_description}</p>
+            <p className="text-lg text-muted-foreground">
+              {product.short_description}
+            </p>
           ) : null}
           {product.description ? (
             <p className="leading-relaxed text-foreground/90">
               {product.description}
             </p>
           ) : null}
-          <div className="pt-1">
-            <WhatsAppButton productName={product.name} className="hover-scale" />
+          <div className="pt-2">
+            <WhatsAppButton
+              productName={product.name}
+              className="hover-scale"
+            />
           </div>
         </Reveal>
       </div>

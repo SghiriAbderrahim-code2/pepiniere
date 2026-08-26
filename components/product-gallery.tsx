@@ -28,7 +28,7 @@ export function ProductGallery({
 
   if (all.length === 0) {
     return (
-      <div className="aspect-square w-full overflow-hidden rounded-2xl border border-border bg-card">
+      <div className="aspect-square w-full overflow-hidden rounded-[2rem] bg-secondary/40">
         <ProductImage src={null} alt="" sizes="(max-width:1024px) 100vw, 50vw" />
       </div>
     );
@@ -42,7 +42,7 @@ export function ProductGallery({
       onKeyDown={handleKey}
       className="flex w-full min-w-0 max-w-full flex-col gap-3 overflow-hidden outline-none"
     >
-      <div className="relative aspect-square w-full min-w-0 overflow-hidden rounded-2xl border border-border bg-card">
+      <div className="relative aspect-square w-full min-w-0 overflow-hidden rounded-[2rem] bg-secondary/40">
         <ProductImage
           src={current}
           alt=""
@@ -51,7 +51,7 @@ export function ProductGallery({
         />
       </div>
       {all.length > 1 ? (
-        <div className="flex w-full min-w-0 max-w-full gap-2 overflow-x-auto overflow-y-hidden pb-1">
+        <div className="flex w-full min-w-0 max-w-full gap-2 overflow-x-auto overflow-y-hidden pb-2 [scrollbar-width:thin]">
           {all.map((src, i) => (
             <button
               key={i}
@@ -60,13 +60,13 @@ export function ProductGallery({
               aria-label={`عرض الصورة ${i + 1}`}
               aria-pressed={i === active}
               className={cn(
-                "relative size-20 shrink-0 overflow-hidden rounded-lg border-2 transition-colors",
+                "relative size-16 shrink-0 overflow-hidden rounded-xl border-2 transition-colors sm:size-[72px]",
                 i === active
                   ? "border-primary"
                   : "border-transparent hover:border-border",
               )}
             >
-              <ProductImage src={src} alt="" sizes="80px" />
+              <ProductImage src={src} alt="" sizes="72px" />
             </button>
           ))}
         </div>

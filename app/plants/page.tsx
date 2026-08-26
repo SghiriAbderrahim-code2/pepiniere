@@ -36,9 +36,9 @@ export default async function PlantsPage({
   const results = filterAndSortProducts(products, search, sort);
 
   return (
-    <Container className="py-10 sm:py-14">
-      <header className="mb-8">
-        <h1 className="font-heading text-3xl font-bold text-foreground">
+    <Container className="py-16 sm:py-20">
+      <header className="mb-10">
+        <h1 className="font-heading text-4xl font-bold text-foreground">
           النباتات
         </h1>
         <p className="mt-2 text-muted-foreground">

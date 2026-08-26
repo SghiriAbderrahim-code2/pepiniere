@@ -20,13 +20,16 @@ export default async function HomePage() {
     <>
       <HomeHero />
 
-      <Container className="py-16">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <Container className="py-20 sm:py-24">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h2 className="font-heading text-2xl font-bold text-foreground">
-              نباتات مختارة
+            <h2 className="font-heading text-3xl font-bold text-foreground">
+              اكتشف نباتاتنا
             </h2>
-            <p className="text-muted-foreground">أجمل النباتات لمنزلك ومساحتك.</p>
+            <p className="mt-2 max-w-xl text-muted-foreground">
+              اختر من مجموعتنا من النباتات والزهور التي تضيف الحياة والجمال إلى
+              مساحتك.
+            </p>
           </div>
           <Link
             href="/plants"

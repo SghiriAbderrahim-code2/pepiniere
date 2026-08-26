@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import type { ComponentType } from "react";
-import { Phone, Mail, MapPin, Map } from "lucide-react";
+import { Phone, MapPin, Map } from "lucide-react";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { WhatsAppIcon } from "@/components/whatsapp-icon";
 import { Reveal } from "@/components/reveal";
 import { Container } from "@/components/container";
 import { store, storePhoneDigits } from "@/lib/store";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "تواصل معنا",
@@ -18,6 +19,7 @@ type ContactInfo = {
   value: string;
   details?: string;
   href?: string;
+  iconClassName?: string;
 };
 
 function ContactCard({
@@ -26,17 +28,18 @@ function ContactCard({
   value,
   details,
   href,
+  iconClassName,
 }: ContactInfo) {
   const body = (
     <>
-      <span className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-        <Icon className="size-5" />
+      <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+        <Icon className={cn("size-5", iconClassName)} />
       </span>
-      <div>
+      <div className="min-w-0">
         <p className="text-sm text-muted-foreground">{title}</p>
         <p className="font-medium text-foreground">{value}</p>
         {details ? (
-          <p className="text-xs text-muted-foreground">{details}</p>
+          <p className="truncate text-xs text-muted-foreground">{details}</p>
         ) : null}
       </div>
     </>
@@ -48,7 +51,7 @@ function ContactCard({
         href={href}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel="noopener noreferrer"
-        className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 transition-colors hover:bg-muted"
+        className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card/60 p-4 transition-colors hover:border-primary/40"
       >
         {body}
       </a>
@@ -56,7 +59,7 @@ function ContactCard({
   }
 
   return (
-    <div className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4">
+    <div className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card/60 p-4">
       {body}
     </div>
   );
@@ -83,15 +86,9 @@ export default function ContactPage() {
     cards.push({
       icon: WhatsAppIcon,
       title: "واتساب",
-      value: "تواصل معنا عبر واتساب",
+      value: "تواصل عبر واتساب",
       href: `https://wa.me/${store.whatsapp.replace(/\D/g, "")}`,
-    });
-  if (store.email)
-    cards.push({
-      icon: Mail,
-      title: "البريد الإلكتروني",
-      value: store.email,
-      href: `mailto:${store.email}`,
+      iconClassName: "text-[#25D366]",
     });
   cards.push({
     icon: Map,
@@ -101,21 +98,27 @@ export default function ContactPage() {
   });
 
   return (
-    <Container className="py-12 sm:py-16">
+    <Container className="py-16 sm:py-24">
       <Reveal>
-        <header className="mb-10 text-center">
-          <h1 className="font-heading text-3xl font-bold text-foreground sm:text-4xl">
-            تواصل معنا
+        <div className="mx-auto max-w-2xl text-center">
+          <h1 className="font-heading text-4xl font-bold text-foreground sm:text-5xl">
+            {store.name}
           </h1>
-          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+          <p className="mt-2 text-lg text-muted-foreground">{store.nameAr}</p>
+          <p className="mx-auto mt-4 max-w-md text-muted-foreground">
             نحن هنا لمساعدتك في اختيار النباتات المناسبة لمساحتك. تواصل معنا عبر
             الوسائل التالية.
           </p>
-        </header>
+          {store.email ? (
+            <p className="mt-2 text-sm text-muted-foreground">
+              أو راسلنا على البريد الإلكتروني: {store.email}
+            </p>
+          ) : null}
+        </div>
       </Reveal>
 
       {cards.length > 0 ? (
-        <Reveal>
+        <Reveal className="mt-12">
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             {cards.map((card, i) => (
               <ContactCard key={i} {...card} />
@@ -123,7 +126,7 @@ export default function ContactPage() {
           </div>
         </Reveal>
       ) : (
-        <p className="text-center text-muted-foreground">
+        <p className="mt-12 text-center text-muted-foreground">
           لا توجد وسائل تواصل مُعرّفة حاليًا.
         </p>
       )}

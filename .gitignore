@@ -46,3 +46,5 @@ next-env.d.ts
 # local dev logs
 start.err
 start.log
+dev.err
+dev.log
