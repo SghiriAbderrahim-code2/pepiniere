@@ -1,5 +1,5 @@
 -- ============================================================================
--- Plant Catalog — Seed Data (20 plants)
+-- Pépinière Al Akhawayn — Seed Data (20 plants)
 -- Requires: supabase/schema.sql already applied (tables + RLS exist).
 -- Run in Supabase → SQL Editor, or execute scripts/seed-plants.mjs.
 -- ============================================================================

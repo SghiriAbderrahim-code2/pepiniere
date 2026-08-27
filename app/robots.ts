@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://plant-catalog.example";
+  "https://pepiniere-al-akhawayn.example";
 
 export default function robots(): MetadataRoute.Robots {
   return {

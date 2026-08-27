@@ -1,5 +1,5 @@
 -- ============================================================================
--- Plant Catalog — Database Schema (STEP 3)
+-- Pépinière Al Akhawayn — Database Schema (STEP 3)
 -- Run this in Supabase → SQL Editor, or via a direct DATABASE_URL (psql/pg).
 -- Runs with service_role / superuser (bypasses RLS), so DDL + seed succeed.
 -- ============================================================================
@@ -10,7 +10,7 @@
 create table if not exists public.profiles (
   id         uuid primary key references auth.users (id) on delete cascade,
   name       text,
-  role       text default 'admin',
+  role       text default 'customer' check (role in ('admin', 'customer')),
   created_at timestamptz not null default now()
 );
 

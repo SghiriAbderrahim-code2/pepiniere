@@ -48,3 +48,5 @@ start.err
 start.log
 dev.err
 dev.log
+prod.err
+prod.log
